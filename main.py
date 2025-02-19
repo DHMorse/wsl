@@ -1,9 +1,10 @@
 import time
+import os
 
 def findFilesFuzzy(searchTerm: str) -> list[str]:
     dirsFound: list[str] = []
 
-    with open("fileSystemCache.txt", "r", encoding="utf-8") as file:
+    with open('C:\\Users\\daniel\\scripts\\WSL\\fileSystemCache.txt', "r", encoding="utf-8") as file:
         for line in file:
             if searchTerm in line:
                 dirsFound.append(line.strip())

@@ -10,6 +10,6 @@ def writeFileSystemCache(outputFile) -> None:
                 file.write(f"{os.path.join(dirpath, filename)}\n")  # Write file path
 
 if __name__ == "__main__":
-    output_file = "fileSystemCache.txt"
+    output_file = 'C:\\Users\\daniel\\scripts\\WSL\\fileSystemCache.txt'
     writeFileSystemCache(output_file)
     print(f"All file paths saved to {output_file}")

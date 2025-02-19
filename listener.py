@@ -3,12 +3,10 @@ import os
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-fileSystemCacheFile = "fileSystemCache.txt"
+fileSystemCacheFile = 'C:\\Users\\daniel\\scripts\\WSL\\fileSystemCache.txt'
 
 class Watcher:
     DIRECTORY_TO_WATCH = "C:\\" if os.name == "nt" else "/"  # Adjust for Windows or Unix-based systems
-
-    #DIRECTORY_TO_WATCH = "C:\\Users\\daniel\\Documents\\code\\wsl"
 
     def __init__(self):
         self.observer = Observer()
