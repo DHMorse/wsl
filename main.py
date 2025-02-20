@@ -44,8 +44,8 @@ def main() -> None:
     print(f"\n{COLORS['green']}Exact filename matches:{COLORS['reset']}")
     print('\n'.join(filepathsFilenameMatches))
 
-    print(f'Your seach took {round(searchEndTime - searchStartTime, 2)} seconds.')
-    print(f'It actually took {round(time.time() - searchStartTime, 2)} seconds.')
+    print(f'\nSearched files in {round(searchEndTime - searchStartTime, 2)} seconds.')
+    print(f'Printed items in {round(time.time() - searchStartTime, 2)} seconds.')
 
 if __name__ == '__main__':
     main()
