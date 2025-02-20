@@ -1,6 +1,6 @@
 import time
 
-from const import FILESYSTEM_CACHE_PATH
+from const import FILESYSTEM_CACHE_PATH, COLORS
 
 def findFilesFuzzy(searchTerm: str) -> list[str]:
     dirsFound: list[str] = []
@@ -40,15 +40,15 @@ def main() -> None:
     filepathsFilenameMatches, filepathsFilenameContains, filepathsPathContains = sortDirsByImportance(searchTerm, dirsToPrint)
     searchEndTime: float = time.time()
     
-    print("\nPath contains search term:")
+    print(f"\n{COLORS['red']}Path contains search term:{COLORS['reset']}")
     for dir in filepathsPathContains:
         print(dir)
     
-    print("\nFilename contains search term:")
+    print(f"\n{COLORS['yellow']}Filename contains search term:{COLORS['reset']}")
     for dir in filepathsFilenameContains:
         print(dir)
     
-    print("\nExact filename matches:")
+    print(f"\n{COLORS['green']}Exact filename matches:{COLORS['reset']}")
     for dir in filepathsFilenameMatches:
         print(dir)
 

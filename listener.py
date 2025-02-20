@@ -19,7 +19,6 @@ def remove_line(filename: str, deletedFilePath: str) -> None:
         if line == deleted_path_bytes:
             # Remove the specified line
             lines.pop(index)
-            print(f"Line '{deletedFilePath}' removed from '{filename}' successfully.")
             break
     
     # Write the modified content back to the file
