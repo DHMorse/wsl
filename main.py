@@ -2,42 +2,37 @@ import time
 
 from const import FILESYSTEM_CACHE_PATH, COLORS
 
-def findFilesFuzzy(searchTerm: str) -> list[str]:
-    dirsFound: list[str] = []
-
-    with open(FILESYSTEM_CACHE_PATH, "r", encoding="utf-8") as file:
-        for line in file:
-            if searchTerm.lower() in line.lower():
-                dirsFound.append(line.strip())
-
-    return dirsFound
-
-def sortDirsByImportance(searchTerm: str, dirs: list[str]) -> tuple[list[str], list[str], list[str]]:
+def fuzzySearchAndCategorizeResults(searchTerm: str) -> tuple[list[str], list[str], list[str]]:
     dirFilenameMatches: list[str] = []
     dirFilenameContains: list[str] = []
     dirPathContains: list[str] = []
 
-    for dir in dirs:
-        filename = dir.split('\\')[-1].split('.')[0]
-        
-        if filename.lower() == searchTerm.lower():
-            dirFilenameMatches.append(dir)
-        
-        elif searchTerm.lower() in filename.lower():
-            dirFilenameContains.append(dir)
-        
-        elif searchTerm.lower() in dir.lower():
-            dirPathContains.append(dir)
+    searchTerm = searchTerm.lower()
+
+    with open(FILESYSTEM_CACHE_PATH, "r", encoding="utf-8") as file:
+        for line in file:
+            lineLower = line.lower()
+            if searchTerm in lineLower:
+                line = line.strip()
+                filename = lineLower.split('\\')[-1].split('.')[0]
+                
+                if filename == searchTerm:
+                    dirFilenameMatches.append(line)
+                
+                elif searchTerm in filename:
+                    dirFilenameContains.append(line)
+                
+                else:
+                    dirPathContains.append(line)
 
     return (dirFilenameMatches, dirFilenameContains, dirPathContains)
 
+
 def main() -> None:
     searchTerm: str = input("Enter the search term (i.e. filename or folder name): ")
-    dirsToPrint: list[str] = [] # This whole thing with the list looks dumb, but it's so that we can tell how long it takes to search all of the files, not how long it takes to print them.
 
     searchStartTime: float = time.time()
-    dirsToPrint = findFilesFuzzy(searchTerm)
-    filepathsFilenameMatches, filepathsFilenameContains, filepathsPathContains = sortDirsByImportance(searchTerm, dirsToPrint)
+    filepathsFilenameMatches, filepathsFilenameContains, filepathsPathContains = fuzzySearchAndCategorizeResults(searchTerm)
     searchEndTime: float = time.time()
     
     print(f"\n{COLORS['red']}Path contains search term:{COLORS['reset']}")
