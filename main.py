@@ -36,18 +36,16 @@ def main() -> None:
     searchEndTime: float = time.time()
     
     print(f"\n{COLORS['red']}Path contains search term:{COLORS['reset']}")
-    for dir in filepathsPathContains:
-        print(dir)
-    
+    print('\n'.join(filepathsPathContains))
+
     print(f"\n{COLORS['yellow']}Filename contains search term:{COLORS['reset']}")
-    for dir in filepathsFilenameContains:
-        print(dir)
-    
+    print('\n'.join(filepathsFilenameContains))
+
     print(f"\n{COLORS['green']}Exact filename matches:{COLORS['reset']}")
-    for dir in filepathsFilenameMatches:
-        print(dir)
+    print('\n'.join(filepathsFilenameMatches))
 
     print(f'Your seach took {round(searchEndTime - searchStartTime, 2)} seconds.')
+    print(f'It actually took {round(time.time() - searchStartTime, 2)} seconds.')
 
 if __name__ == '__main__':
     main()
