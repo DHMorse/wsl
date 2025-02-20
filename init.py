@@ -1,11 +1,11 @@
-import os
 from listener import Watcher
+from const import FILESYSTEM_CACHE_PATH
 
 from cache import writeFileSystemCache
 
 def main() -> None:
     print("We are creating the cache this might take a while.")
-    writeFileSystemCache('C:\\Users\\daniel\\scripts\\WSL\\fileSystemCache.txt')
+    writeFileSystemCache(FILESYSTEM_CACHE_PATH)
     print("Cache created.")
 
     w = Watcher()

@@ -1,0 +1,1 @@
+FILESYSTEM_CACHE_PATH = 'C:\\Users\\daniel\\scripts\\WSL\\fileSystemCache.txt'
