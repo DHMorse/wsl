@@ -1,5 +1,5 @@
 # YOU HAVE TO HAVE AN ABSOLUTE PATH
-FILESYSTEM_CACHE_PATH = '/home/daniel/Code/wsl/data/fileSystemCache.txt'
+FILESYSTEM_CACHE_PATH = '' # something/something/data/fileSystemCache.txt
 
 COLORS = {
     'black': '\033[30m',
