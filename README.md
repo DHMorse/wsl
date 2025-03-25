@@ -33,6 +33,10 @@ cd wsl
 pip install -r requirements.txt
 ```
 
+3. Configure the file path:
+   - Open `src/const.py` and update the file path to match your system's configuration
+   - This path is used for storing the file system cache and must be set correctly for the tool to function
+
 ## Building Executables
 
 ### Windows
