@@ -1,4 +1,5 @@
 import time
+import os
 
 from const import FILESYSTEM_CACHE_PATH, COLORS
 
@@ -14,7 +15,7 @@ def fuzzySearchAndCategorizeResults(searchTerm: str) -> tuple[list[str], list[st
             lineLower = line.lower()
             if searchTerm in lineLower:
                 line = line.strip()
-                filename = lineLower.split('\\')[-1].split('.')[0]
+                filename = lineLower.split(os.sep)[-1].split('.')[0]
                 
                 if filename == searchTerm:
                     dirFilenameMatches.append(line)

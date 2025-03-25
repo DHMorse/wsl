@@ -1,16 +1,13 @@
-from listener import Watcher
+from listener import main as listener
 from const import FILESYSTEM_CACHE_PATH
 
 from cache import writeFileSystemCache
 
 def main() -> None:
-    print("We are creating the cache this might take a while.")
     writeFileSystemCache(FILESYSTEM_CACHE_PATH)
     print("Cache created.")
 
-    w = Watcher()
-    w.run()
-
+    listener()
 
 if __name__ == '__main__':
     main()

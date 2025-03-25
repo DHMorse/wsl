@@ -5,6 +5,12 @@ import concurrent.futures
 import tempfile
 
 def writeFileSystemCache(outputFile, max_workers=8) -> None:
+    if not os.path.exists(outputFile):
+        print(f"Creating directory: {os.path.dirname(outputFile)}")
+        os.makedirs(os.path.dirname(outputFile), exist_ok=True)
+    
+    print("We are creating the cache this might take a while.")
+
     # Check if script is already running with elevated privileges
     is_admin = False
     
@@ -31,7 +37,8 @@ def writeFileSystemCache(outputFile, max_workers=8) -> None:
                                '-Verb', 'RunAs'], check=True)
             else:
                 # For Unix, use sudo to elevate privileges
-                subprocess.run(['sudo', 'python3', __file__, outputFile], check=True)
+                writeFileSystemCacheUnix(outputFile)
+                return
             return  # Exit original non-elevated process
         except subprocess.SubprocessError:
             print("Warning: Could not obtain elevated privileges. Some files may be inaccessible.")
@@ -110,6 +117,22 @@ def writeFileSystemCache(outputFile, max_workers=8) -> None:
                 except Exception as e:
                     print(f"Error processing directory: {e}")
                     continue
+
+def writeFileSystemCacheUnix(outputFile: str) -> None:
+    """
+    Write a cache of the filesystem structure to the specified output file on Unix-like systems.
+    
+    Args:
+        outputFile: The path where the cache file should be written
+    """
+    try:
+        with open(outputFile, 'w') as f:
+            subprocess.run(['sudo', 'find', '/', '-type', 'f', '-o', '-type', 'd'], 
+                         stdout=f, 
+                         stderr=subprocess.DEVNULL, 
+                         check=True)
+    except subprocess.SubprocessError:
+        print("Warning: Could not access a file")
 
 # If script is executed directly
 if __name__ == "__main__":
